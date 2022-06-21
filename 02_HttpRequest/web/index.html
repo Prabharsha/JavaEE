@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>html File HomePage</title>
+</head>
+<body>
+<h1>
+    This is Html File As HomePage
+</h1>
+<button id="btn1"> Click Here</button>
+<script src="assets/jQuery/jquery-3.6.0.min.js"></script>
+<script>
+    $("#btn1").click(function (){
+        console.log("pressed");
+       $.ajax({
+          url:"http://localhost:8080/absd1/customer",
+           method:"POST",
+           success:function (resp){
+              console.log(resp);
+           }
+       });
+    });
+</script>
+</body>
+</html>
