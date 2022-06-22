@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/01_HelloServlet/01_HelloServlet.iml" filepath="$PROJECT_DIR$/01_HelloServlet/01_HelloServlet.iml" />
       <module fileurl="file://$PROJECT_DIR$/02_HttpRequest/02_HttpRequest.iml" filepath="$PROJECT_DIR$/02_HttpRequest/02_HttpRequest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MappingSpec_03/MappingSpec_03.iml" filepath="$PROJECT_DIR$/MappingSpec_03/MappingSpec_03.iml" />
     </modules>
   </component>
 </project>
