@@ -14,6 +14,11 @@ import java.sql.SQLException;
 @WebServlet(urlPatterns = "/customer")
 public class CustomerServlet extends HttpServlet {
     @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        
+    }
+
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             resp.setContentType("application/json");
@@ -46,4 +51,5 @@ public class CustomerServlet extends HttpServlet {
 
 
     }
+
 }
