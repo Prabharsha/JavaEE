@@ -46,8 +46,10 @@
        $.ajax({
           url:"customer",
            method:"GET",
-           dataType:"json",
+          /* dataType:"json",*/
            success:function (resp){
+              console.log(resp);
+               console.log(typeof resp)
              for (const customer of resp){
                  let row = `<tr><td>${customer.id}</td><td>${customer.name}</td><td>${customer.address}</td><td>${customer.salary}</td></tr>`
                  $("#tblCustomerJson").append(row);

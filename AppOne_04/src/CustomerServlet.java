@@ -16,6 +16,11 @@ public class CustomerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+            resp.setContentType("application/json");
+
+            resp.addHeader("appOne","approved");
+            resp.addHeader("Browser","Brave");
+
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/company","root","1234");
             ResultSet rst = connection.prepareStatement("SELECT * FROM customer").executeQuery();
@@ -25,13 +30,14 @@ public class CustomerServlet extends HttpServlet {
                 String name = rst.getString(2);
                 String address = rst.getString(3);
                 double salary = rst.getDouble(4);
-                System.out.println(id+" "+name+" "+address+" "+salary);
 
                 //convert one record to Json
                 String customer = "{\"id\":\""+id+"\",\"name\":\""+name+"\",\"address\":\""+address+"\",\"salary\":"+salary+"},";
                 records=records+customer;
             }
+            //after last object "," must be removed
             String finalJson ="[" + records.substring(0,records.length()-1) + "]";
+
             PrintWriter writer = resp.getWriter();
             writer.write(finalJson);
         } catch (ClassNotFoundException | SQLException e) {
