@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>App One</title>
+    <title>App Two</title>
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <section class="container mt-3 bg-dark text-white p-3 mt-4 ">
-    <h2 class="fw-lighter mt-4">App One </h2>
+    <h2 class="fw-lighter mt-4">App Two </h2>
 </section>
 <section class="container fw-light mt-3" >
     <!--customer save-->
     <h2>Add Customer</h2>
     <div class="row mt-3">
         <div class="col-4">
-            <form action="customer" method="post" >
+            <form  id="customerForm">
                 <div class="mb-3">
                     <label for="custId" class="form-label"> Customer ID</label>
                     <input type="text" id="custId" class="form-control" placeholder="Customer ID" name="customerId">
@@ -33,7 +33,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-success" id="btnAddCustomer"> + Add Customer </button>
+                    <button type="button" class="btn btn-success" id="btnAddCustomer"> + Add Customer </button>
                 </div>
             </form>
         </div>
@@ -85,6 +85,16 @@
                 }
             }
         });
+    });
+
+    $("#btnAddCustomer").click(function (){
+        alert("Customer Save Request Send !")
+        var data = $("#customerForm").serialize(); /*obtaining data fom the forum*/
+        $.ajax({
+            url:"customer",
+            method: "POST",
+            data:data, /*send data with the request*/
+        })
     });
 </script>
 </body>

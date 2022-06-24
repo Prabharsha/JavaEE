@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="AppTwo">
+    <output-path>$PROJECT_DIR$/out/artifacts/AppTwo</output-path>
+    <root id="archive" name="AppTwo.war">
+      <element id="javaee-facet-resources" facet="AppTwo/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="AppTwo" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="mysql-connector-java-5.1.49" />
+          <element id="library" level="application_server_libraries" name="Tomcat 8.5.77" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
