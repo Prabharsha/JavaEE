@@ -32,8 +32,9 @@
                     <input type="text" id="custSalary" class="form-control" placeholder="Customer Salary" name="customerSalary">
                 </div>
 
-                <div class="mb-3">
+                <div  class="mb-3 container-fluid ">
                     <button type="button" class="btn btn-success" id="btnAddCustomer"> + Add Customer </button>
+                    <button type="button" class="btn btn-danger" id="btnDeleteCustomer"> - Delete Customer</button>
                 </div>
             </form>
         </div>
@@ -70,6 +71,35 @@
 <script src="assets/jQuery/jquery-3.6.0.min.js"></script>
 <script>
     $("#btn1").click(function () {
+        loadAllCustomers();
+    });
+
+    $("#btnAddCustomer").click(function (){
+        alert("Customer Save Request Send !")
+        var data = $("#customerForm").serialize(); /*obtaining data fom the forum*/
+        $.ajax({
+            url:"customer",
+            method: "POST",
+            data:data, /*send data with the request*/
+            success:function (res){
+                loadAllCustomers();
+            }
+        });
+
+    });
+
+    $("#btnDeleteCustomer").click(function (){
+        let customerId = $("#custId").val();
+       $.ajax({
+           url:"customer?custId="+customerId,
+           method:"DELETE",
+           success:function (res){
+               alert("Customer Deleted !");
+               loadAllCustomers();
+           }
+       });
+    });
+    function loadAllCustomers(){
         $("#tblCustomerJson").empty();
         console.log("Request Send");
         $.ajax({
@@ -85,17 +115,7 @@
                 }
             }
         });
-    });
-
-    $("#btnAddCustomer").click(function (){
-        alert("Customer Save Request Send !")
-        var data = $("#customerForm").serialize(); /*obtaining data fom the forum*/
-        $.ajax({
-            url:"customer",
-            method: "POST",
-            data:data, /*send data with the request*/
-        })
-    });
+    }
 </script>
 </body>
 </html>
