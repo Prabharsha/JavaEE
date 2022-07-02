@@ -36,9 +36,8 @@ public class CustomerServlet extends HttpServlet {
                     ResultSet resultSet = connection.prepareStatement("SELECT * FROM customer").executeQuery();
                     JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();//json array
 
-                    //Access thereports andgenerate a Json object
+                    //Access the reports and generate a Json object
                     while (resultSet.next()) {
-                        System.out.println("inside while");
                         String tempId = resultSet.getString(1);
                         String tempName = resultSet.getString(2);
                         String tempAddress = resultSet.getString(3);
@@ -99,9 +98,23 @@ public class CustomerServlet extends HttpServlet {
             }
 
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            JsonObjectBuilder response = Json.createObjectBuilder();
+            response.add("status", 400);
+            response.add("message", "Error");
+            response.add("data", e.getLocalizedMessage());
+            writer.print(response.build());
+
+            resp.setStatus(HttpServletResponse.SC_OK); //200
+            e.printStackTrace();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            JsonObjectBuilder response = Json.createObjectBuilder();
+            response.add("status", 400);
+            response.add("message", "Error");
+            response.add("data", e.getLocalizedMessage());
+            writer.print(response.build());
+
+            resp.setStatus(HttpServletResponse.SC_OK); //200
+            e.printStackTrace();
         }
 
     }
