@@ -17,7 +17,7 @@ public class CustomerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
 
-        // create the DBCP pool
+/*        // create the DBCP pool
         BasicDataSource dbcp = new BasicDataSource();
         dbcp.setDriverClassName("com.mysql.jdbc.Driver");
         dbcp.setUrl("jdbc:mysql://localhost:3306/company");
@@ -27,7 +27,10 @@ public class CustomerServlet extends HttpServlet {
         dbcp.setInitialSize(5);
 
         ServletContext servletContext = req.getServletContext(); //the common place for all servlets
-        servletContext.setAttribute("dbcp",dbcp); //store the pool inside the servlet context
+        servletContext.setAttribute("dbcp",dbcp); //store the pool inside the servlet context*/
+
+        ServletContext servletContext = req.getServletContext();
+        BasicDataSource dbcp = (BasicDataSource) servletContext.getAttribute("dbcp");
 
         try {
             Connection connection = dbcp.getConnection();
@@ -38,6 +41,7 @@ public class CustomerServlet extends HttpServlet {
                 String id = resultSet.getString(1);
                 System.out.println(id);
             }
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -45,7 +49,23 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ServletContext servletContext = req.getServletContext();
+        BasicDataSource dbcp = (BasicDataSource) servletContext.getAttribute("dbcp");
+        System.out.println("DoPost Method");
 
+        try{
+            Connection connection = dbcp.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Customer");
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                System.out.println(id);
+            }
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 }
